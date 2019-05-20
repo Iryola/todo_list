@@ -5,16 +5,16 @@ class TodoItem extends React.Component {
     super(props);
 
     this.state = {
-      done: props.done
+      done: props.item.done
     };
   }
 
   toggleDone = () => {
-    fetch(`http://localhost:5000/todo/${this.props.id}`, {
+    fetch(`http://localhost:5000/todo/${this.props.item.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        title: this.props.title,
+        title: this.props.item.title,
         done: !this.state.done
       })
     })
@@ -32,8 +32,8 @@ class TodoItem extends React.Component {
           onClick={this.toggleDone}
           defaultChecked={this.state.done}
         />
-        <p className={this.state.done ? "done" : null}>{this.props.title}</p>
-        <button onClick={() => this.props.deleteItem(this.props.id)}>X</button>
+        <p className={this.state.done ? "done" : null}>{this.props.item.title}</p>
+        <button onClick={() => this.props.deleteItem(this.props.item.id)}>del</button>
       </div>
     );
   }
